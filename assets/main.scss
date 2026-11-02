@@ -1,0 +1,15 @@
+---
+# 定制 Minima
+---
+@import "minima";
+body {
+  font-size: 18px;
+  line-height: 1.8em;
+  font-family: "Noto Sans Mongolian", "Mongolian Baiti";
+  writing-mode: vertical-lr;
+  #a:link { text-decoration: overline }
+}
+ol,ul {margin: 40px;}
+.post-content > p {
+  text-indent: 2em;
+}
