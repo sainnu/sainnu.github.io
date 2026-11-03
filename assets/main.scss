@@ -3,11 +3,21 @@
 ---
 @import "minima";
 body {
+  min-height: 0;
+  min-block-size: 100vw;
   font-size: 18px;
   line-height: 1.8em;
   font-family: "Noto Sans Mongolian", "Mongolian Baiti";
   writing-mode: vertical-lr;
   #a:link { text-decoration: overline }
+}
+.site-header{
+  border-top: 0;
+  border-block-start: 5px solid #22a96b;
+  border-bottom: 0;
+  border-block-end: 1px solid #e8e8e8;
+  min-height: default;
+  min-block-size: 55.95px;
 }
 ol,ul {margin: 40px;}
 .post-content > p {
