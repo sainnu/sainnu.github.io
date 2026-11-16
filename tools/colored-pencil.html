@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>红蓝铅笔</title>
+<style>
+  body, input, button{
+    writing-mode: vertical-lr;
+    font-size: 48px;
+  }
+  #tips{font-size: 24px;}
+  #output {
+    font-size: 48px;
+    font-family: "Noto Sans Mongolian", "Mongolian Baiti", monospace;
+    letter-spacing: 2px;
+    white-space: pre-wrap; /* 保留空格，避免被折叠 */
+    word-break: break-all;
+  }
+  .even { color: red; }   /* 偶数位置（索引 0,2,4...） */
+  .odd  { color: blue; }  /* 奇数位置（索引 1,3,5...） */
+</style>
+</head>
+<body>
+<div id="tips">
+<p>
+提示：
+为了方便蒙古文学习，了解蒙古文的变体在词中的变化，特设计了此工具，用于实时显示字符在词中使用的变体。
+</p>
+<p>
+使用方法：
+在输入框中输入蒙古文，然后点击 <kbd>着色</kbd> 按钮，后面就会出现逐个字符变色显示的蒙古文词。
+</p>
+</div>
+<input id="input" type="text" value="ᠮᠣᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ᠃ 😀" size="20">
+<button id="btn"> 着 色 </button>
+
+<div id="output"></div>
+
+<script>
+/**
+ * 将字符串逐个字符渲染到容器中，按索引奇偶设置颜色
+ * @param {string} str  待处理的字符串
+ * @param {HTMLElement} container 输出容器
+ */
+function colorize(str, container) {
+  container.innerHTML = '';
+
+  // 用 Array.from 按「码点」拆分，中文/emoji（如 😀）不会被截断
+  Array.from(str).forEach((ch, index) => {
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.className = index % 2 === 0 ? 'even' : 'odd';
+    container.appendChild(span);
+  });
+}
+
+const inputEl = document.getElementById('input');
+const outputEl = document.getElementById('output');
+
+// 点击按钮时着色
+document.getElementById('btn').addEventListener('click', () => {
+  colorize(inputEl.value, outputEl);
+});
+
+// 输入时实时着色
+inputEl.addEventListener('input', () => {
+  colorize(inputEl.value, outputEl);
+});
+
+// 页面初次加载时先渲染一次
+colorize(inputEl.value, outputEl);
+</script>
+
+</body>
+</html>
